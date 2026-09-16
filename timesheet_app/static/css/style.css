@@ -168,3 +168,52 @@ form.inline {
     border-radius: 4px;
     margin-bottom: 14px;
 }
+
+.status-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.status-group {
+    display: flex;
+    gap: 8px;
+}
+
+.status-btn {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: #fff;
+    color: #374151;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.status-btn:hover {
+    background: #f3f4f6;
+}
+
+.status-btn.selected.status-draft-btn {
+    background: #6b7280;
+    border-color: #6b7280;
+    color: #fff;
+}
+
+.status-btn.selected.status-submitted-btn {
+    background: #b45309;
+    border-color: #b45309;
+    color: #fff;
+}
+
+.status-btn.selected.status-approved-btn {
+    background: #15803d;
+    border-color: #15803d;
+    color: #fff;
+}
+
+.status-btn.selected.status-rejected-btn {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #fff;
+}

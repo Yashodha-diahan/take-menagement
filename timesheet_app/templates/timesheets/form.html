@@ -11,6 +11,21 @@
 
 <form method="post">
     <div class="form-group">
+        <label>Status</label>
+        <input type="hidden" id="status" name="status" value="{{ timesheet.status if timesheet else 'draft' }}">
+        <div class="status-picker">
+            <div class="status-group" id="stage-group">
+                <button type="button" class="status-btn status-draft-btn" data-value="draft">Draft</button>
+                <button type="button" class="status-btn status-submitted-btn" data-value="submitted">Submitted</button>
+            </div>
+            <div class="status-group" id="decision-group">
+                <button type="button" class="status-btn status-approved-btn" data-value="approved">Approved</button>
+                <button type="button" class="status-btn status-rejected-btn" data-value="rejected">Rejected</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="employee_id">Employee</label>
         <select id="employee_id" name="employee_id" required>
             <option value="">-- Select an employee --</option>
@@ -63,15 +78,6 @@
         <textarea id="notes" name="notes" rows="3">{{ timesheet.notes if timesheet else '' }}</textarea>
     </div>
 
-    <div class="form-group">
-        <label for="status">Status</label>
-        <select id="status" name="status">
-            {% for s in statuses %}
-            <option value="{{ s }}" {% if timesheet and timesheet.status == s %}selected{% endif %}>{{ s }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
     <button type="submit" class="btn">Save</button>
     <a class="btn btn-danger" href="{{ url_for('timesheets.list_timesheets') }}">Cancel</a>
 </form>
@@ -109,5 +115,42 @@
     if (projectSelect.value) {
         loadTasks(projectSelect.value, currentTaskId);
     }
+
+    // Status picker: Draft/Submitted on the left, Approved/Rejected on the right.
+    // The Approved/Rejected group only shows once "Submitted" is active (or the
+    // entry is already approved/rejected). Picking a button highlights it while
+    // the other button in that group stays visible so it can still be chosen.
+    const statusInput = document.getElementById("status");
+    const stageButtons = document.querySelectorAll("#stage-group .status-btn");
+    const decisionButtons = document.querySelectorAll("#decision-group .status-btn");
+    const decisionGroup = document.getElementById("decision-group");
+    const allStatusButtons = document.querySelectorAll(".status-btn");
+
+    function highlight(value) {
+        allStatusButtons.forEach((btn) => {
+            btn.classList.toggle("selected", btn.dataset.value === value);
+        });
+    }
+
+    function updateDecisionVisibility(value) {
+        const showDecision = value === "submitted" || value === "approved" || value === "rejected";
+        decisionGroup.style.display = showDecision ? "flex" : "none";
+    }
+
+    function setStatus(value) {
+        statusInput.value = value;
+        highlight(value);
+        updateDecisionVisibility(value);
+    }
+
+    stageButtons.forEach((btn) => {
+        btn.addEventListener("click", () => setStatus(btn.dataset.value));
+    });
+
+    decisionButtons.forEach((btn) => {
+        btn.addEventListener("click", () => setStatus(btn.dataset.value));
+    });
+
+    setStatus(statusInput.value);
 </script>
 {% endblock %}
