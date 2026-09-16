@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<h1>Tasks</h1>
+
+<div class="actions">
+    <a class="btn" href="{{ url_for('tasks.new_task') }}">New Task</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Project</th>
+            <th>Employee</th>
+            <th>Estimated Hours</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in tasks %}
+        <tr>
+            <td>{{ t.title }}</td>
+            <td>{{ t.project_name }}</td>
+            <td>{{ t.employee_name or "-" }}</td>
+            <td>{{ t.estimated_hours if t.estimated_hours is not none else "-" }}</td>
+            <td>
+                <span class="status-{{ t.status }}">{{ t.status }}</span>
+            </td>
+            <td>
+                <a class="btn" href="{{ url_for('tasks.edit_task', task_id=t.id) }}">Edit</a>
+                <form class="inline" method="post"
+                      action="{{ url_for('tasks.delete_task', task_id=t.id) }}"
+                      onsubmit="return confirm('Delete this task?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">No tasks yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

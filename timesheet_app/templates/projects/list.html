@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<h1>Projects</h1>
+
+<div class="actions">
+    <a class="btn" href="{{ url_for('projects.new_project') }}">New Project</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in projects %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.client or "-" }}</td>
+            <td>{{ p.start_date or "-" }}</td>
+            <td>{{ p.end_date or "-" }}</td>
+            <td>
+                <span class="status-{{ p.status }}">{{ p.status }}</span>
+            </td>
+            <td>
+                <a class="btn" href="{{ url_for('projects.edit_project', project_id=p.id) }}">Edit</a>
+                <form class="inline" method="post"
+                      action="{{ url_for('projects.delete_project', project_id=p.id) }}"
+                      onsubmit="return confirm('Archive this project?');">
+                    <button type="submit" class="btn btn-danger">Archive</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">No projects yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

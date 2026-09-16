@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f5f7;
+    color: #1f2937;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: #1f2937;
+    color: #fff;
+}
+
+.site-header .brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.site-header nav a {
+    color: #e5e7eb;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 0.95rem;
+}
+
+.site-header nav a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 0 20px;
+}
+
+h1, h2 {
+    color: #111827;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    background: #eef1f5;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+tr:hover {
+    background: #f9fafb;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+.btn-danger {
+    background: #dc2626;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+.actions {
+    margin-bottom: 16px;
+}
+
+form.inline {
+    display: inline;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.status-active,
+.status-approved {
+    color: #15803d;
+    font-weight: bold;
+}
+
+.status-inactive,
+.status-draft {
+    color: #6b7280;
+}
+
+.status-submitted {
+    color: #b45309;
+    font-weight: bold;
+}
+
+.status-rejected,
+.status-cancelled {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    background: #fff;
+    padding: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+.filter-bar .form-group {
+    margin-bottom: 0;
+    min-width: 160px;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+}

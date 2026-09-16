@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Time Sheet Management{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">Time Sheet Management</div>
+        <nav>
+            <a href="{{ url_for('main.index') }}">Dashboard</a>
+            <a href="{{ url_for('employees.list_employees') }}">Employees</a>
+            <a href="{{ url_for('projects.list_projects') }}">Projects</a>
+            <a href="{{ url_for('tasks.list_tasks') }}">Tasks</a>
+            <a href="{{ url_for('timesheets.list_timesheets') }}">Time Sheets</a>
+        </nav>
+    </header>
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

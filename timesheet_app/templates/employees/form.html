@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ "Edit Employee" if employee else "New Employee" }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Edit Employee" if employee else "New Employee" }}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="full_name">Full name</label>
+        <input type="text" id="full_name" name="full_name" required
+               value="{{ employee.full_name if employee else '' }}">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required
+               value="{{ employee.email if employee else '' }}">
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone"
+               value="{{ employee.phone if employee else '' }}">
+    </div>
+
+    <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" id="role" name="role"
+               value="{{ employee.role if employee else '' }}">
+    </div>
+
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <option value="active" {% if employee and employee.status == "active" %}selected{% endif %}>Active</option>
+            <option value="inactive" {% if employee and employee.status == "inactive" %}selected{% endif %}>Inactive</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn">Save</button>
+    <a class="btn btn-danger" href="{{ url_for('employees.list_employees') }}">Cancel</a>
+</form>
+{% endblock %}

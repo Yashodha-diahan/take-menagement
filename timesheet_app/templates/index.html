@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="actions">
+    <strong>{{ employee_count }}</strong> employees &nbsp;|&nbsp;
+    <strong>{{ project_count }}</strong> projects &nbsp;|&nbsp;
+    <strong>{{ task_count }}</strong> tasks &nbsp;|&nbsp;
+    <strong>{{ timesheet_count }}</strong> timesheet entries
+</div>
+
+<h2>Recent Time Sheet Entries</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Project</th>
+            <th>Task</th>
+            <th>Date</th>
+            <th>Hours</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in recent_timesheets %}
+        <tr>
+            <td>{{ t.full_name }}</td>
+            <td>{{ t.project_name }}</td>
+            <td>{{ t.task_title }}</td>
+            <td>{{ t.work_date }}</td>
+            <td>{{ t.hours_worked }}</td>
+            <td><span class="status-{{ t.status }}">{{ t.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">No time sheet entries yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
